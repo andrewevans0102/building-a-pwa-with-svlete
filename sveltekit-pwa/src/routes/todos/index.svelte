@@ -31,7 +31,6 @@
 		created_at: Date;
 		text: string;
 		done: boolean;
-		pending_delete: boolean;
 	};
 
 	export let todos: Todo[];
@@ -106,13 +105,12 @@
 				action="/todos/{todo.uid}.json?_method=delete"
 				method="post"
 				use:enhance={{
-					pending: () => (todo.pending_delete = true),
 					result: () => {
 						todos = todos.filter((t) => t.uid !== todo.uid);
 					}
 				}}
 			>
-				<button class="delete" aria-label="Delete todo" disabled={todo.pending_delete} />
+				<button class="delete" aria-label="Delete todo" />
 			</form>
 		</div>
 	{/each}
